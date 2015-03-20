@@ -59,7 +59,10 @@ int main(int argc, char **argv)
     }
     if (nativeOrientation == Qt::PrimaryOrientation)
         nativeOrientation = app.primaryScreen()->primaryOrientation();
+    QByteArray useShader= qgetenv("GLACIER_USESHADER");
+    bool isShaderUsed = QString(useShader) == "1";
     app.engine()->rootContext()->setContextProperty("nativeOrientation", nativeOrientation);
+    app.engine()->rootContext()->setContextProperty("isShaderUsed", isShaderUsed);
     qmlRegisterType<GlacierWindowModel>("org.nemomobile.glacier", 1, 0 ,"GlacierWindowModel");
     app.setQmlPath("/usr/share/lipstick-glacier-home-qt5/qml/MainScreen.qml");
     // Give these to the environment inside the lipstick homescreen

@@ -349,12 +349,12 @@ Compositor {
             setCurrentWindow(window)
         } else if (isAlarmWindow){
             root.topmostAlarmWindow = window
-            w = mysticWrapper.createObject(parent, {window: window})
+            w = isShaderUsed ? mysticWrapper.createObject(parent, {window: window}) : w
             window.userData = w
             setCurrentWindow(w)
         } else {
             if (!root.topmostAlarmWindow) {
-                w = mysticWrapper.createObject(parent, {window: window})
+                w = isShaderUsed ? mysticWrapper.createObject(parent, {window: window}) : w
                 window.userData = w
                 setCurrentWindow(w)
             }
