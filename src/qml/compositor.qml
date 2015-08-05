@@ -318,7 +318,7 @@ Compositor {
         var isOverlayWindow =  window.category == "overlay"
         var isAlarmWindow = window.category == "alarm"
         var parent = null
-        if (window.category == "cover") {
+        if (window.category == "cover" || window.title == "_CoverWindow") {
             window.visible = false
             return
         }
