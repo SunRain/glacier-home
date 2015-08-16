@@ -33,11 +33,13 @@
 
 int main(int argc, char **argv)
 {
-    QmlPath::append("/usr/share/lipstick-glacier-home-qt5/qml");
+//    QmlPath::append("/usr/share/lipstick-glacier-home-qt5/qml");
+    QmlPath::append ("qrc:///qml");
     HomeApplication app(argc, argv, QString());
 
     QGuiApplication::setFont(QFont("Open Sans"));
-    app.setCompositorPath("/usr/share/lipstick-glacier-home-qt5/qml/compositor.qml");
+//    app.setCompositorPath("/usr/share/lipstick-glacier-home-qt5/qml/compositor.qml");
+    app.setCompositorPath ("qrc:///qml/compositor.qml");
     Qt::ScreenOrientation nativeOrientation = app.primaryScreen()->nativeOrientation();
     QByteArray v = qgetenv("GLACIER_NATIVEORIENTATION");
     if (!v.isEmpty()) {
@@ -62,7 +64,8 @@ int main(int argc, char **argv)
         nativeOrientation = app.primaryScreen()->primaryOrientation();
     app.engine()->rootContext()->setContextProperty("nativeOrientation", nativeOrientation);
     qmlRegisterType<GlacierWindowModel>("org.nemomobile.glacier", 1, 0 ,"GlacierWindowModel");
-    app.setQmlPath("/usr/share/lipstick-glacier-home-qt5/qml/MainScreen.qml");
+//    app.setQmlPath("/usr/share/lipstick-glacier-home-qt5/qml/MainScreen.qml");
+    app.setQmlPath ("qrc:///qml/MainScreen.qml");
     // Give these to the environment inside the lipstick homescreen
     // Fixes a bug where some applications wouldn't launch, eg. terminal or browser
     setenv("EGL_PLATFORM", "wayland", 1);
