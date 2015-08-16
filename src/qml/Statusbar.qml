@@ -29,25 +29,29 @@
 **
 ****************************************************************************************/
 import QtQuick 2.1
-import QtQuick.Layouts 1.0
-import QtQuick.Controls.Nemo 1.0
-import QtQuick.Controls.Styles.Nemo 1.0
+//import QtQuick.Layouts 1.0
+//import QtQuick.Controls.Nemo 1.0
+//import QtQuick.Controls.Styles.Nemo 1.0
 import org.freedesktop.contextkit 1.0
 import MeeGo.Connman 0.2
 
+import Sailfish.Silica 1.0
+
 Item {
     id: root
-    z: 201
-    height: 48
+    height: Theme.itemSizeExtraSmall *0.6
     width: parent.width
-    anchors.bottom: parent.bottom
-
     Rectangle {
         id: statusbar
-        color: "black"
+        color: "#000000"
         anchors.fill: parent
         opacity: 0.5
-        z: 200
+        z: root.z - 1
+        gradient: Gradient {
+            GradientStop {position: 0; color: "#FFFFFF"}
+//            GradientStop {position: 0.5; color: "#888A85"}
+            GradientStop {position: 1.0; color: "#000000" }
+        }
     }
     Connections {
         target: lipstickSettings;
@@ -128,30 +132,35 @@ Item {
         visible: false
     }
 
-    RowLayout {
-        anchors.fill: statusbar
-        spacing: 16
+    Row {
+        id: row
+        anchors.horizontalCenter: parent.horizontalCenter
+        spacing: Theme.paddingSmall
+        property int _itemWidth: root.width /9 - Theme.paddingSmall
+        property int _itemHeight: root.height
         StatusbarItem {
+            width: row._itemWidth
+            height: row._itemHeight
             source: (cellularSignalBars.value > 0) ? "image://theme/icon_cell" + cellularSignalBars.value : "image://theme/icon_cell1"
         }
 
         StatusbarItem {
+            width: row._itemWidth
+            height: row._itemHeight
             Label {
                 id: tech
-                width: 16
-                height: 16
-                font.pointSize: 6
+                width: parent.width
                 font.bold: true
+                font.pixelSize: row._itemHeight *0.4
                 wrapMode: Text.ElideRight
                 text: (cellularNetworkName.value !== "") ? cellularNetworkName.value.substring(0,3).toUpperCase() : "NA"
             }
 
             Label {
                 anchors.top: tech.bottom
-                anchors.topMargin: 4
-                width: 16
-                height: 16
-                font.pointSize: 6
+//                anchors.topMargin: row._itemHeight *0.1
+                width: parent.width
+                font.pixelSize: row._itemHeight *0.4
                 text: {
                     var techToG = {gprs: "2", egprs: "2.5", umts: "3", hspa: "3.5", lte: "4", unknown: "0"}
                     return techToG[cellularDataTechnology.value ? cellularDataTechnology.value : "unknown"] + "G"
@@ -161,6 +170,8 @@ Item {
         }
 
         StatusbarItem {
+            width: row._itemWidth
+            height: row._itemHeight
             source: {
                 if (wlan.connected) {
                     if (networkManager.defaultRoute.type !== "wifi")
@@ -183,37 +194,46 @@ Item {
             panel: WifiPanel {}
         }
         StatusbarItem {
+            width: row._itemWidth
+            height: row._itemHeight
             source: "image://theme/icon_bt_normal"
         }
         StatusbarItem {
+            width: row._itemWidth
+            height: row._itemHeight
             source: "image://theme/icon_nfc_normal"
         }
         StatusbarItem {
+            width: row._itemWidth
+            height: row._itemHeight
             source: "image://theme/icon_gps_normal"
         }
         StatusbarItem {
+            width: row._itemWidth
+            height: row._itemHeight
             source: "image://theme/icon_play_pause"
         }
         StatusbarItem {
+            width: row._itemWidth
+            height: row._itemHeight
             Label {
                 id: hours
-                width: 16
-                height: 16
-                font.pointSize: 6
+                font.pixelSize: row._itemHeight *0.4
+                width: parent.width
                 text: Qt.formatDateTime(wallClock.time, "hh")
             }
             Label {
                 id: minutes
                 anchors.top: hours.bottom
-                anchors.topMargin: 4
-                width: 16
-                height: 16
-                font.pointSize: 6
+//                anchors.topMargin: row._itemHeight *0.1
+                font.pixelSize: row._itemHeight *0.4
                 text: Qt.formatDateTime(wallClock.time, "mm")
             }
         }
 
         StatusbarItem {
+            width: row._itemWidth
+            height: row._itemHeight
             panel: BatteryPanel {}
             source: {
                 if(batteryChargePercentage.value > 85) {

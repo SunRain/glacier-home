@@ -130,6 +130,8 @@ import Sailfish.Silica 1.0
 
             Statusbar {
                 id: statusbar
+                anchors.bottom: parent.bottom
+                z: lockView.z + 1
             }
             Pager {
                 id: pager
@@ -171,7 +173,8 @@ import Sailfish.Silica 1.0
 
                 width: parent.width
                 height: parent.height
-                z: 200
+//                z: 200
+                z: pager.z + 1
             }
         }
     }

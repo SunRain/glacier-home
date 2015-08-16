@@ -1,14 +1,18 @@
 import QtQuick 2.0
-import QtQuick.Layouts 1.0
+//import QtQuick.Layouts 1.0
+import Sailfish.Silica 1.0
 
 Item {
+    id: statusbarItem
     property alias source: icon.source
     property string panel_source
     property Component panel
-    Layout.fillWidth: true
-    Layout.fillHeight: true
+
     Image {
         id: icon
+        width: parent.width
+        height: parent.height
+        fillMode: Image.PreserveAspectFit
         anchors.centerIn: parent
     }
     MouseArea {
