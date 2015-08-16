@@ -39,7 +39,27 @@ import org.nemomobile.configuration 1.0
 import org.nemomobile.lipstick 0.1
 import "scripts/desktop.js" as Desktop
 
-Page {
+import Sailfish.Silica 1.0
+
+/*Page*/ ApplicationWindow {
+    id: desktop
+    //    property alias lockscreen: lockScreen
+    //    property alias switcher: switcher
+    property var lockscreen
+    property var switcher
+    // Implements back key navigation
+
+    cover: undefined
+
+    Keys.onReleased: {
+        if (event.key === Qt.Key_Back) {
+            if (pageStack.depth > 1) {
+                pageStack.pop();
+                event.accepted = true;
+            } else { Qt.quit(); }
+        }
+    }
+
     // This is used in the favorites page and in the lock screen
     WallClock {
         id: wallClock
@@ -52,31 +72,15 @@ Page {
         key: desktop.isPortrait ? "/desktop/meego/background/portrait/picture_filename" : "/desktop/meego/background/landscape/picture_filename"
         defaultValue: "qrc:/images/graphics-wallpaper-home.jpg"
     }
-    id: desktop
-    property alias lockscreen: lockScreen
-    property alias switcher: switcher
-    // Implements back key navigation
 
-    Keys.onReleased: {
-        if (event.key === Qt.Key_Back) {
-            if (pageStack.depth > 1) {
-                pageStack.pop();
-                event.accepted = true;
-            } else { Qt.quit(); }
-        }
-    }
-
-    Statusbar {
-        id: statusbar
-    }
 
     GlacierRotation {
         id: glacierRotation
         rotationParent: desktop.parent
-        unrotatedItems: [lockScreen]
+        unrotatedItems: [/*lockScreen*/desktop.lockscreen]
     }
 
-    orientation: Lipstick.compositor.screenOrientation
+    //    orientation: Lipstick.compositor.screenOrientation
 
     onOrientationChanged: {
         if (!lockscreenVisible())
@@ -88,8 +92,8 @@ Page {
     }
 
     Component.onCompleted: {
-        Desktop.instance = desktop
-        Lipstick.compositor.screenOrientation = nativeOrientation
+        //        Desktop.instance = desktop
+        //        Lipstick.compositor.screenOrientation = nativeOrientation
     }
 
     Connections {
@@ -113,45 +117,62 @@ Page {
 
     }
 
-    Pager {
-        id: pager
+    initialPage: Component {
+        Page {
+            id: mainPage
+            Component.onCompleted: {
+                Desktop.instance = desktop
+                Lipstick.compositor.screenOrientation = nativeOrientation
 
-        anchors.fill: parent
-        model: VisualItemModel {
-            AppLauncher {
-                id: launcher
-                height: pager.height
-                switcher: switcher
+                desktop.lockscreen = lockView
+                desktop.switcher = appSwitcher
             }
-            AppSwitcher {
-                id: switcher
-                width: pager.width
-                height: pager.height
-                visibleInHome: x > -width && x < desktop.width
-                launcher: launcher
+
+            Statusbar {
+                id: statusbar
             }
-            FeedsPage {
-                id: feeds
-                width: pager.width
-                height: pager.height
+            Pager {
+                id: pager
+
+                anchors.fill: parent
+                model: VisualItemModel {
+                    AppLauncher {
+                        id: launcher
+                        height: pager.height
+                        switcher: switcher
+                    }
+
+                    AppSwitcher {
+                        id: switcher
+                        width: pager.width
+                        height: pager.height
+                        visibleInHome: x > -width && x < desktop.width
+                        launcher: launcher
+                    }
+
+                    FeedsPage {
+                        id: feeds
+                        width: pager.width
+                        height: pager.height
+                    }
+                }
+
+                // Initial view should be the AppLauncher
+                currentIndex: 0
+            }
+            Image {
+                id:wallpaper
+                source: "qrc:/images/wallpaper-portrait-bubbles.png"
+                anchors.fill: parent
+                z: -100
+            }
+            Lockscreen {
+                id: lockView/*lockScreen*/
+
+                width: parent.width
+                height: parent.height
+                z: 200
             }
         }
-
-        // Initial view should be the AppLauncher
-        currentIndex: 0
     }
-    Image {
-        id:wallpaper
-        source: "qrc:/images/wallpaper-portrait-bubbles.png"
-        anchors.fill: parent
-        z: -100
-    }
-    Lockscreen {
-        id: lockScreen
-
-        width: parent.width
-        height: parent.height
-        z: 200
-    }
-
 }
