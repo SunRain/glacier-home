@@ -5,7 +5,7 @@ TEMPLATE = app
 TARGET = lipstick
 VERSION = 0.1
 
-INSTALLS = target
+INSTALLS += target
 target.path = /usr/bin
 
 styles.path = /usr/share/lipstick-glacier-home-qt5
@@ -112,3 +112,14 @@ OTHER_FILES += qml/*.qml \
     qml/DeviceLock.qml
 
 
+service.path = /usr/lib/systemd/user
+service.files = lipstick.service
+INSTALLS += service
+
+service2.path = /usr/lib/systemd/user/user-session.target.wants
+service2.files = lipstick.service
+INSTALLS += service2
+
+desktopfile.path = /etc/xdg/autostart
+desktopfile.files = lipstick.desktop
+INSTALLS += desktopfile

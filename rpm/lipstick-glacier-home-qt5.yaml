@@ -9,7 +9,8 @@ Sources:
     - "%{name}-%{version}.tar.bz2"
     - lipstick.desktop
 Description: A homescreen for Nemo Mobile
-Builder: qmake5
+#Builder: qmake5
+Builder: qtc5
 Requires:
     - lipstick-qt5 >= 0.17.0
     - nemo-qml-plugin-configuration-qt5
@@ -19,13 +20,14 @@ Requires:
     - nemo-qml-plugin-contextkit-qt5
     - connman-qt5
     - libqofono-qt5-declarative
+
 PkgConfigBR:
     - Qt5Core
     - Qt5Quick
     - lipstick-qt5 >= 0.12.0
     - Qt5Compositor
-ExtraSources:
-  - lipstick.service;%{_libdir}/systemd/user/
+#ExtraSources:
+  #- lipstick.service;%{_libdir}/systemd/user/
 Conflicts:
   - lipstick-example-home
 Files:
