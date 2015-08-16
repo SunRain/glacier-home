@@ -137,7 +137,7 @@ Item {
                 }
                 width: notificationArea.notificationIconSize
                 height: width
-                source: "qrc:/qml/images/notification-circle.png"
+                source: "qrc:/images/notification-circle.png"
             }
 
             Text {

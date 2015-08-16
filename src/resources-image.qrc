@@ -1,0 +1,23 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/button_default.png</file>
+        <file>images/button_pressed.png</file>
+        <file>images/navigation_next_item.png</file>
+        <file>images/navigation_previous_item.png</file>
+        <file>images/tab_selected.png</file>
+        <file>images/tabs_standard.png</file>
+        <file>images/textinput.png</file>
+        <file>images/toolbar.png</file>
+        <file>images/graphics-wallpaper-home.jpg</file>
+        <file>images/battery0.png</file>
+        <file>images/battery1.png</file>
+        <file>images/battery2.png</file>
+        <file>images/battery3.png</file>
+        <file>images/battery4.png</file>
+        <file>images/battery5.png</file>
+        <file>images/battery6.png</file>
+        <file>theme/icon-m-framework-close-thumbnail.png</file>
+        <file>images/notification-circle.png</file>
+        <file>images/wallpaper-portrait-bubbles.png</file>
+    </qresource>
+</RCC>

@@ -8,6 +8,10 @@ Name:       lipstick-glacier-home-qt5
 # >> macros
 # << macros
 
+%{!?qtc_qmake:%define qtc_qmake %qmake}
+%{!?qtc_qmake5:%define qtc_qmake5 %qmake5}
+%{!?qtc_make:%define qtc_make make}
+%{?qtc_builddir:%define _builddir %qtc_builddir}
 Summary:    A nice homescreen for Glacier experience
 Version:    0.28
 Release:    1
@@ -16,7 +20,6 @@ License:    BSD
 URL:        https://github.com/locusf/glacier-home
 Source0:    %{name}-%{version}.tar.bz2
 Source1:    lipstick.desktop
-Source2:    lipstick.service
 Source100:  lipstick-glacier-home-qt5.yaml
 Requires:   lipstick-qt5 >= 0.17.0
 Requires:   nemo-qml-plugin-configuration-qt5
@@ -45,9 +48,9 @@ A homescreen for Nemo Mobile
 # >> build pre
 # << build pre
 
-%qmake5 
+%qtc_qmake5 
 
-make %{?_smp_mflags}
+%qtc_make %{?_smp_mflags}
 
 # >> build post
 # << build post
@@ -57,14 +60,11 @@ rm -rf %{buildroot}
 # >> install pre
 # << install pre
 %qmake5_install
-mkdir -p %{buildroot}%{_libdir}/systemd/user/
-cp -a %{SOURCE2} %{buildroot}%{_libdir}/systemd/user/
-
 
 # >> install post
-install -D -m 644 %{SOURCE1} %{buildroot}/etc/xdg/autostart/lipstick.desktop
-mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/
-ln -s ../lipstick.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/lipstick.service
+#install -D -m 644 %{SOURCE1} %{buildroot}/etc/xdg/autostart/lipstick.desktop
+#mkdir -p %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/
+#ln -s ../lipstick.service %{buildroot}%{_libdir}/systemd/user/user-session.target.wants/lipstick.service
 # << install post
 
 %files
@@ -74,6 +74,5 @@ ln -s ../lipstick.service %{buildroot}%{_libdir}/systemd/user/user-session.targe
 %config /etc/xdg/autostart/*.desktop
 %{_libdir}/systemd/user/user-session.target.wants/lipstick.service
 %{_datadir}/lipstick-glacier-home-qt5/nemovars.conf
-%{_datadir}/lipstick-glacier-home-qt5/qml
 # >> files
 # << files
