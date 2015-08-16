@@ -217,21 +217,21 @@ Item {
             panel: BatteryPanel {}
             source: {
                 if(batteryChargePercentage.value > 85) {
-                    return "qrc:/qml/images/battery6.png"
+                    return "qrc:/images/battery6.png"
                 } else if (batteryChargePercentage.value <= 5) {
-                    return "qrc:/qml/images/battery0.png"
+                    return "qrc:/images/battery0.png"
                 } else if (batteryChargePercentage.value <= 10) {
-                    return "qrc:/qml/images/battery1.png"
+                    return "qrc:/images/battery1.png"
                 } else if (batteryChargePercentage.value <= 25) {
-                    return "qrc:/qml/images/battery2.png"
+                    return "qrc:/images/battery2.png"
                 } else if (batteryChargePercentage.value <= 40) {
-                    return "qrc:/qml/images/battery3.png"
+                    return "qrc:/images/battery3.png"
                 } else if (batteryChargePercentage.value <= 65) {
-                    return "qrc:/qml/images/battery4.png"
+                    return "qrc:/images/battery4.png"
                 } else if (batteryChargePercentage.value <= 80) {
-                    return "qrc:/qml/images/battery5.png"
+                    return "qrc:/images/battery5.png"
                 } else {
-                    return "qrc:/qml/images/battery6.png"
+                    return "qrc:/images/battery6.png"
                 }
             }
         }

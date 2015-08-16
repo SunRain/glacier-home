@@ -75,9 +75,12 @@ SOURCES += \
     glacierwindowmodel.cpp
 
 RESOURCES += \
-    resources-qml.qrc
+    resources-image.qrc
 
 PKGCONFIG += lipstick-qt5
+
+#hack for my build env
+INCLUDEPATH += /usr/include/lipstick-qt5
 
 OTHER_FILES += qml/*.qml \
     qml/MainScreen.qml \

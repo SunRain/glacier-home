@@ -29,6 +29,7 @@
 #include <QQmlContext>
 #include "glacierwindowmodel.h"
 #include <QScreen>
+#include <lipstickqmlpath.h>
 
 int main(int argc, char **argv)
 {
