@@ -27,6 +27,7 @@ import QtQuick 2.0
 import QtQuick.Controls.Nemo 1.0
 import QtQuick.Controls.Styles.Nemo 1.0
 import org.nemomobile.lipstick 0.1
+import Sailfish.Silica 1.0
 
 Item {
     id: wrapper
@@ -90,6 +91,11 @@ Item {
             }
             onClicked: {
                 model.object.launchApplication()
+
+                if ((model.object.type === LauncherModel.Application) && model.object.isLaunching) {
+                    spinner.running = true;
+                    spinnerTimer.start();
+                }
             }
         }
     }
@@ -189,6 +195,14 @@ Item {
             }
         }
 
+        Timer {
+            id: spinnerTimer
+            interval: 500
+            onTriggered: {
+                spinner.running = false;
+            }
+        }
+
         Behavior on scale {
             NumberAnimation { easing.type: Easing.InOutQuad; duration: 150 }
         }
@@ -206,14 +220,18 @@ Item {
                 top: parent.top
                 topMargin: 8
             }
-            width: 100
+            width: Theme.iconSizeLauncher
             height: width
             asynchronous: true
 
             Spinner {
                 id: spinner
                 anchors.centerIn: parent
-                enabled: (model.object.type === LauncherModel.Application) ? model.object.isLaunching : false
+                width: parent.width
+                height: parent.height
+                enabled: (model.object.type === LauncherModel.Application)
+                         ? model.object.isLaunching
+                         : false
             }
         }
 

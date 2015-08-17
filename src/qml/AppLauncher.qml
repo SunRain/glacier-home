@@ -24,22 +24,34 @@
 
 import QtQuick 2.0
 import org.nemomobile.lipstick 0.1
-import QtQuick.Controls.Nemo 1.0
-import QtQuick.Controls.Styles.Nemo 1.0
+//import QtQuick.Controls.Nemo 1.0
+//import QtQuick.Controls.Styles.Nemo 1.0
+import Sailfish.Silica 1.0
 
 // App Launcher page
 // the place for browsing installed applications and launching them
 
-GridView {
+SilicaGridView {
     id: gridview
-    cellWidth: 115
-    cellHeight: cellWidth + 30
-    width: Math.floor(parent.width / cellWidth) * cellWidth
+//    cellWidth: 115
+//    cellHeight: cellWidth + 30
+//    width: Math.floor(parent.width / cellWidth) * cellWidth
     cacheBuffer: gridview.contentHeight
     property Item reorderItem
     property bool onUninstall
     property alias deleter: deleter
     property var switcher: null
+
+    // reference row height: 960 / 6
+    property int rows: Math.floor(Screen.height / (Theme.pixelRatio * 160))
+    property int columns: Math.floor(Screen.width / Theme.itemSizeExtraLarge)
+    property int initialCellWidth: (Screen.width - Theme.paddingLarge * 2) / columns
+
+    // Increase cellWidth so that icon vertical edges are Theme.paddingLarge away from display edges
+    cellWidth: Math.floor(initialCellWidth + (initialCellWidth - Theme.iconSizeLauncher) / (columns - 1))
+    cellHeight: Math.round(Screen.height / rows)
+
+    width: cellWidth * columns
 
     // just for margin purposes
     header: Item {
@@ -87,11 +99,26 @@ GridView {
 
     model: LauncherFolderModel { id: launcherModel }
 
+    function _adjustIcon(icon) {
+        if (icon.indexOf(':/') !== -1 || icon.indexOf("data:image/png;base64") === 0) {
+            return icon
+        } else if (icon.indexOf('/') === 0) {
+            return 'file://' + icon
+        } else {
+            return 'image://theme/' + icon
+        }
+    }
+
     delegate: LauncherItemDelegate {
         id: launcherItem
         width: gridview.cellWidth
         height: gridview.cellHeight
-        source: model.object.iconId == "" ? ":/images/icons/apps.png" : (model.object.iconId.indexOf("/") == 0 ? "file://" : "image://theme/") + model.object.iconId
+//        source: model.object.iconId == ""
+//                ? ":/images/icons/apps.png"
+//                : (model.object.iconId.indexOf("/") == 0
+//                   ? "file://"
+//                   : "image://theme/") + model.object.iconId
+        source: gridview._adjustIcon(model.object.iconId)
         iconCaption: model.object.title
     }
 }

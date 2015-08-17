@@ -30,5 +30,6 @@
         <file>qml/USBModeSelector.qml</file>
         <file>qml/VolumeControl.qml</file>
         <file>qml/WifiPanel.qml</file>
+        <file>qml/Spinner.qml</file>
     </qresource>
 </RCC>

@@ -138,10 +138,16 @@ import Sailfish.Silica 1.0
 
                 anchors.fill: parent
                 model: VisualItemModel {
-                    AppLauncher {
-                        id: launcher
+                    Item {
                         height: pager.height
-                        switcher: switcher
+                        width: pager.width
+                        AppLauncher {
+                            id: launcher
+                            height: pager.height
+//                            width: pager.width
+                            switcher: switcher
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        }
                     }
 
                     AppSwitcher {
