@@ -18,17 +18,17 @@
         <file>qml/Lockscreen.qml</file>
         <file>qml/LockscreenClock.qml</file>
         <file>qml/MainScreen.qml</file>
-        <file>qml/NotificationPreview.qml</file>
+        <file>qml/notifications/NotificationPreview.qml</file>
         <file>qml/NumButton.qml</file>
         <file>qml/Pager.qml</file>
-        <file>qml/ShutdownScreen.qml</file>
+        <file>qml/system/ShutdownScreen.qml</file>
         <file>qml/SimPanel.qml</file>
         <file>qml/Statusbar.qml</file>
         <file>qml/StatusbarItem.qml</file>
         <file>qml/SwitcherItem.qml</file>
         <file>qml/ToolBarLayoutExample.qml</file>
-        <file>qml/USBModeSelector.qml</file>
-        <file>qml/VolumeControl.qml</file>
+        <file>qml/connectivity/USBModeSelector.qml</file>
+        <file>qml/volumecontrol/VolumeControl.qml</file>
         <file>qml/WifiPanel.qml</file>
         <file>qml/Spinner.qml</file>
     </qresource>

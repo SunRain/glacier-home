@@ -166,6 +166,7 @@ Item {
             y = newPos.y - height/2 * (1-scale)
         }
 
+        //TODO: remove app by using Jolla way
         function moved() {
             if (reordering) {
                 var gridViewPos = gridview.contentItem.mapFromItem(launcherItem, width/2, height/2)
