@@ -24,11 +24,13 @@
 
 import QtQuick 2.1
 import org.nemomobile.lipstick 0.1
-import QtQuick.Controls.Nemo 1.0
-import QtQuick.Controls.Styles.Nemo 1.0
+//import QtQuick.Controls.Nemo 1.0
+//import QtQuick.Controls.Styles.Nemo 1.0
+import Sailfish.Silica 1.0
+
 // Feeds page:
 // the place for an event feed.
-Flickable {
+SilicaFlickable {
     id: mainFlickable
 
     contentHeight: rootitem.height

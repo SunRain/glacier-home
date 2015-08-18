@@ -101,7 +101,7 @@ Item {
         anchors.horizontalCenter: innerRect.left
         anchors.verticalCenter: innerRect.top
         width: container.circleWidth //Theme.spinner.radius
-        height: container.circleWidt //Theme.spinner.radius
+        height: container.circleWidth //Theme.spinner.radius
         radius: 32 //Theme.spinner.radius / 2
         color: Theme.primaryColor
     }
@@ -112,7 +112,7 @@ Item {
         anchors.horizontalCenter: innerRect.right
         anchors.verticalCenter: innerRect.top
         width: container.circleWidth //Theme.spinner.radius
-        height: container.circleWidt //Theme.spinner.radius
+        height: container.circleWidth //Theme.spinner.radius
         radius: 32 //Theme.spinner.radius / 2
         color: Theme.primaryColor
     }
@@ -123,7 +123,7 @@ Item {
         anchors.horizontalCenter: innerRect.right
         anchors.verticalCenter: innerRect.bottom
         width: container.circleWidth //Theme.spinner.radius
-        height: container.circleWidt //Theme.spinner.radius
+        height: container.circleWidth //Theme.spinner.radius
         radius: 32 //Theme.spinner.radius / 2
         color: Theme.primaryColor
     }
@@ -134,7 +134,7 @@ Item {
         anchors.horizontalCenter: innerRect.left
         anchors.verticalCenter: innerRect.bottom
         width: container.circleWidth //Theme.spinner.radius
-        height: container.circleWidt //Theme.spinner.radius
+        height: container.circleWidth //Theme.spinner.radius
         radius: 32 //Theme.spinner.radius / 2
         color: Theme.primaryColor
     }
